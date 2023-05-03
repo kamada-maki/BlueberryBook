@@ -1,0 +1,25 @@
+{
+  "name": "blueberrybook",
+  "version": "1.0.0",
+  "description": "### コーディングルール - ローカルで使える CSM を用意 - 対象の本を固定 - ひたすらサンプルコードを写経して実行 - コミットログにページ番号を含める - 疑問点があったらコミットログや本に書き込む",
+  "main": "index.js",
+  "type": "module",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/kamada-maki/BlueberryBook.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/kamada-maki/BlueberryBook/issues"
+  },
+  "homepage": "https://github.com/kamada-maki/BlueberryBook#readme",
+  "devDependencies": {
+    "@types/node": "^14.14.10",
+    "typescript": "^4.6.2"
+  }
+}
