@@ -76,9 +76,9 @@ export const sentence9 = () => {
   console.log(obj);
 
   // これらはOK
-  let val:{} = 123;
+  let val: {} = 123;
   val = "foobar";
-  val = {num:1234};
+  val = { num: 1234 };
 
   //これはエラー
   // val = null;
