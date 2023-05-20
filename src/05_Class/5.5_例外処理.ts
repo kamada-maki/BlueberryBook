@@ -182,6 +182,3 @@ getAverage([1, 2, 3]);
     return result;
   }
 };
-export const sentence11 = () => {};
-export const sentence12 = () => {};
-export const sentence13 = () => {};
