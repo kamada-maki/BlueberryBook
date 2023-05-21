@@ -114,5 +114,3 @@ export const sentence8 = () => {
   //これは"uhyo"型
   let uhyo4 = uhyo2;
 };
-export const sentence9 = () => {};
-export const sentence10 = () => {};
