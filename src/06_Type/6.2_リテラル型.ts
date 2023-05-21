@@ -28,8 +28,10 @@ export const sentence3 = () => {
       return "Hello My world";
     } else if (rand < 0.9) {
       // return "Hello, world" エラー
+      return "Hello !";
     } else {
       //   return "Hell,world";エラー
+      return "Hello !!";
     }
   }
   function makeKey<T extends string>(userName: T) {
