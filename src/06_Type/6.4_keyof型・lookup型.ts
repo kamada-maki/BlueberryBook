@@ -121,5 +121,4 @@ export const sentence5 = () => {
     return obj[key];
   }
 };
-export const sentence6 = () => {};
-export const sentence7 = () => {};
+
