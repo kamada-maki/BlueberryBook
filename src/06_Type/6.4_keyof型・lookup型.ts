@@ -75,7 +75,51 @@ export const sentence3 = () => {
   //エラー:型 '"kg"' の引数を型 '"mm" | "m" | "km"' のパラメーターに割り当てることはできません。
   //console.log(convertUnits(5600,"kg"));
 };
-export const sentence4 = () => {};
-export const sentence5 = () => {};
+
+// 6.4.3 keyof型・lookup型とジェネリクス
+export const sentence4 = () => {
+  function get<T, K extends keyof T>(obj: T, key: K): T[K] {
+    return obj[key];
+  }
+  type Human = {
+    name: string;
+    age: number;
+  };
+  const uhyo: Human = {
+    name: "uhyo",
+    age: 26,
+  };
+
+  //uhyoName型はstring型
+  const uhyoName = get(uhyo, "name");
+
+  //uhyoAge型はnumber型
+  const uhyoAge = get(uhyo, "age");
+
+  //const uhyoGender = get(uhyo, "gender");//keyof Human(name | age)に含まれないためエラー
+};
+
+// 6.4.4 number型もキーになれる？
+export const sentence5 = () => {
+  type Obj = {
+    0: string;
+    1: number;
+  };
+  const obj: Obj = {
+    0: "uhyo",
+    "1": 26,
+  };
+
+  obj["0"] = "john";
+  obj[1] = 15;
+
+  // ObjKeysは 0 | 1 型
+  type ObjKeys = keyof Obj;
+
+  function get<T, K extends keyof T & string>(obj: T, key: K) {
+    const keyName: string = key; //& string でエラーなくなる
+    return obj[key];
+  }
+};
 export const sentence6 = () => {};
 export const sentence7 = () => {};
