@@ -65,7 +65,17 @@ export const sentence3 = () => {
     return user1?.name ?? user2?.name;
   }
 };
-export const sentence4 = () => {};
-export const sentence5 = () => {};
-export const sentence6 = () => {};
-export const sentence7 = () => {};
+
+// 6.5.2 as const の用法
+export const sentence4 = () => {
+  //string[]型
+  const name1 = ["uhyo", "John", "Taro"];
+  // readonly["uhyo","John","Taro"]型
+  const names = ["uhyo", "John", "Taro"] as const;
+
+  type Name = (typeof names)[number];
+};
+export const sentence5 = () => {
+  type Name = "uhyo" | "John" | "Taro";
+  const names: Name[] = ["uhyo", "John", "Taro"];
+};
