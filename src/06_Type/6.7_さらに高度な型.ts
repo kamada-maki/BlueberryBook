@@ -48,7 +48,56 @@ export const sentence2 = () => {
   const str: string = result;
   console.log(str);
 };
-export const sentence3 = () => {};
+
+// 6.7.2 型述語（ユーザー定義型ガード）
+export const sentence3 = () => {
+  function isStringOrNumber(value: unknown): value is string | number {
+    return typeof value === "string" || typeof value === "number";
+    // return typeof value === "string" || typeof value === "boolean"; //実装を間違えてもエラーにならない
+  }
+  const something: unknown = 123;
+
+  if (isStringOrNumber(something)) {
+    console.log(something.toString());
+  }
+
+  type Human = {
+    type: "Human";
+    name: string;
+    age: number;
+  };
+
+  function isHuman(value: any): value is Human {
+    //プロパティアクセスできない可能性を排除
+    if (value == null) return false;
+
+    return (
+      value.type === "Human" &&
+      typeof value.name === "string" &&
+      typeof value.age === "number"
+    );
+  }
+
+  function assertHuman(value: any): asserts value is Human {
+    if (value === null) {
+      throw new Error("Given value is null or undifined");
+    }
+    // 3つのプロパティの型を判定
+    if (
+      value.type !== "Human" ||
+      typeof value.name !== "string" ||
+      typeof value.age !== "number"
+    ) {
+      throw new Error("Given value is not a Human");
+    }
+  }
+
+  function checkAndUseHuman(value: unknown) {
+    assertHuman(value);
+    //ここから下ではvalueがHuman型になる
+    const name = value.name;
+  }
+};
 export const sentence4 = () => {};
 export const sentence5 = () => {};
 export const sentence6 = () => {};
