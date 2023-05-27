@@ -131,5 +131,68 @@ export const sentence4 = () => {
   // SNSNSは[string,number,string,number,string]型
   type SNSNS = [string, ...NSN, string];
 };
-export const sentence5 = () => {};
-export const sentence6 = () => {};
+
+// 6.7.4 mapped types
+export const sentence5 = () => {
+  type Fruit = "apple" | "orange" | "starawberry";
+
+  //   FruitNumbersは{
+  //     apple:number;
+  //     orage:number:;
+  //     strawberry:number:
+  //   }型
+
+  type FruitNumbers = {
+    [P in Fruit]: number;
+  };
+
+  const numbers: FruitNumbers = {
+    apple: 3,
+    orange: 10,
+    starawberry: 20,
+  };
+
+  //   FruitArraysは{
+  //     apple:"apple"[];
+  //     orange:"orange"[];
+  //     strawberry:"strawberry"[];
+  //   }型
+
+  type FuritArrays = {
+    [P in Fruit]: P[];
+  };
+
+  const numbers2: FuritArrays = {
+    apple: ["apple", "apple"],
+    orange: ["orange", "orange", "orange"],
+    starawberry: [],
+  };
+};
+
+// 6.7.5 conditional types
+export const sentence6 = () => {
+  type RestArgs<M> = M extends "string"
+    ? [string, string]
+    : [number, number, number];
+  function func<M extends "string" | "number">(
+    mode: MIDIAccess,
+    ...args: RestArgs<M>
+  ) {
+    console.log(mode, ...args);
+  }
+
+  //   func("string", "uhyo", "hyo");
+  //   func("number", 1, 2, 3);
+
+  //こちらはコンパイルエラー
+  //   func("string", 1, 2);
+  //   func("number", "uhyo", "hyo");
+};
+
+
+export const sentence7 = () => {};
+export const sentence8 = () => {};
+export const sentence9 = () => {};
+export const sentence10 = () => {};
+export const sentence11 = () => {};
+export const sentence12 = () => {};
