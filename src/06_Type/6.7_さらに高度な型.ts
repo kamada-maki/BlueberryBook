@@ -189,10 +189,65 @@ export const sentence6 = () => {
   //   func("number", "uhyo", "hyo");
 };
 
+// 6.7.6 組み込みの型を使いこなす
+export const sentence7 = () => {
+  // Tは{
+  //     readonly name:string;
+  //     readonly age:number;
+  // }
 
-export const sentence7 = () => {};
-export const sentence8 = () => {};
-export const sentence9 = () => {};
-export const sentence10 = () => {};
-export const sentence11 = () => {};
-export const sentence12 = () => {};
+  type T = Readonly<{
+    name: string;
+    age: number;
+  }>;
+
+  //   T2は{
+  //     name?:string | undefined;
+  //     age?:number | undefined
+  //   }
+
+  type T2 = Partial<{
+    name: string;
+    age: number;
+  }>;
+
+  //   T3は{
+  //     age:number
+  //   }
+
+  type T3 = Pick<
+    {
+      name: string;
+      age: number;
+    },
+    "age"
+  >;
+};
+export const sentence8 = () => {
+  type Union = "uhyo" | "hyo" | 1 | 2 | 3;
+  //Tは"uhyo" | "hyo"
+  type T = Extract<Union, string>;
+  //T2は 1 | 2 | 3
+  type T2 = Exclude<Union, string>;
+};
+export const sentence9 = () => {
+  type Human = {
+    type: "Human";
+    name: string;
+    age: number;
+  };
+
+  function isPropertyAccesible(
+    value: unknown
+  ): value is { [key: string]: unknown } {
+    return value != null;
+  }
+  function isHuman(value: any): value is Human {
+    if (value == null) return false;
+    return (
+      value.type === "Human" &&
+      typeof value.name === "string" &&
+      typeof value.age === "number"
+    );
+  }
+};
