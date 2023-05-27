@@ -98,6 +98,38 @@ export const sentence3 = () => {
     const name = value.name;
   }
 };
-export const sentence4 = () => {};
+
+//6.7.3 可変長タプル型
+export const sentence4 = () => {
+  type NumberAndStrings = [number, ...string[]];
+  //これらはOK
+  const arr1: NumberAndStrings = [25, "uhyo", "hyo", "hyo"];
+  const arr2: NumberAndStrings = [25];
+
+  //これはらコンパイルエラー
+  //   const arr3: NumberAndStrings = ["uhyo", "hyo"];
+  //   const arr4: NumberAndStrings = [25, 26, 27];
+  //   const arr5: NumberAndStrings = [];
+
+  type NumberStringNumber = [number, ...string[], number];
+  //これらはOK
+  const arr01: NumberStringNumber = [25, "uhyo", "hyo", 0];
+  const arr02: NumberStringNumber = [25, 25];
+  //これらはコンパイルエラー
+  //   const arr03: NumberStringNumber = [25, "uhyo", "hyo", "hyo"];
+  //   const arr04: NumberStringNumber = [];
+  //   const arr05: NumberStringNumber = ["uhyo", "hyo", 25];
+  //   const arr06: NumberStringNumber = [25, "uhyo", 25, "uhyo"];
+
+  // ...配列型を2回使っているのでコンパイルエラー
+  //   type T1 = [number, ...string[], number, ...string[]];
+  //   type T2 = [number, ...string[], ...number[], string];
+  //オプショナルな要素を...配列型よりも後ろで使っているのでコンパイルエラー
+  //   type T3 = [number, ...string[], number?];
+
+  type NSN = [number, string, number];
+  // SNSNSは[string,number,string,number,string]型
+  type SNSNS = [string, ...NSN, string];
+};
 export const sentence5 = () => {};
 export const sentence6 = () => {};
