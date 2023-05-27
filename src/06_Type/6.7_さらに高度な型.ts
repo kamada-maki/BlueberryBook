@@ -174,15 +174,12 @@ export const sentence6 = () => {
   type RestArgs<M> = M extends "string"
     ? [string, string]
     : [number, number, number];
-  function func<M extends "string" | "number">(
-    mode: MIDIAccess,
-    ...args: RestArgs<M>
-  ) {
+  function func<M extends "string" | "number">(mode: M, ...args: RestArgs<M>) {
     console.log(mode, ...args);
   }
 
-  //   func("string", "uhyo", "hyo");
-  //   func("number", 1, 2, 3);
+  func("string", "uhyo", "hyo");
+  func("number", 1, 2, 3);
 
   //こちらはコンパイルエラー
   //   func("string", 1, 2);
@@ -250,4 +247,4 @@ export const sentence9 = () => {
       typeof value.age === "number"
     );
   }
-}
+};
