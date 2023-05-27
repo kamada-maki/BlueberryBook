@@ -250,4 +250,4 @@ export const sentence9 = () => {
       typeof value.age === "number"
     );
   }
-};
+}
