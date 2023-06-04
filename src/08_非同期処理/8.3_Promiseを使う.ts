@@ -206,8 +206,121 @@ export const sentence15 = () => {
       setTimeout(reject, duration);
     });
   };
-  const p = Promise.any([readFile("foo.txt", "utf8"), sleepReject(5000)]);
+  //   const p = Promise.any[readFile("foo.txt", "utf8"), sleepReject(5000)]);
+  const p = Promise.all([readFile("foo.txt", "utf8"), sleepReject(5000)]);
   p.then((result) => {
     console.log(result);
   });
+};
+
+// 8.3.8 Promiseチェーン(1)チェーンを作る
+export const sentence16 = () => {
+  const p = readFile("foo.txt", "utf8");
+  const p2 = p.then((result) => result + result);
+  const p3 = p.catch(() => "");
+  p2.then((result) => {
+    console.log(result);
+  });
+};
+export const sentence17 = () => {
+  readFile("foo.txt", "utf8")
+    .catch(() => "")
+    .then((result) => {
+      console.log(result);
+    });
+
+  readFile("foo.txt", "utf8")
+    .finally(() => {
+      console.log("foo.txt is loaded?");
+    })
+    .catch(() => "")
+    .then((result) => {
+      console.log(result);
+    });
+};
+
+// 8.3.9 Promiseチェーンを(2) 非同期処理の連鎖
+export const sentence18 = () => {
+  const repeat10 = (str: string) =>
+    new Promise<string>((resolve) => {
+      setTimeout(() => resolve(str.repeat(10)), 1000);
+    });
+
+  readFile("foo,txt", "utf8")
+    .then((result) => repeat10(result))
+    .then((result) => {
+      console.log(result);
+    });
+  const p1 = readFile("foo.txt", "utf8");
+  const p3 = p1.then((result) => {
+    const p2 = repeat10(result);
+    return p2;
+  });
+  p3.then((result) => {
+    console.log(result);
+  });
+};
+
+// 8.3.10 Promisetチェーン(3) エラーの扱い
+export const sentence19 = () => {
+  const p1 = readFile("foo.txt", "utf8");
+  const p2 = p1.then((result) => {
+    throw new Error("Error!!!!!");
+  });
+  p2.then((result) => {
+    console.log(result);
+  });
+};
+export const sentence20 = () => {
+  const sleepReject = (duration: number) => {
+    return new Promise<never>((resolve, reject) => {
+      setTimeout(reject, duration);
+    });
+  };
+  const p = readFile("foo.txt", "utf8")
+    .then(() => sleepReject(1000))
+    .then(
+      (result) => {
+        console.log(result);
+      },
+      () => {
+        console.log("失敗しました");
+      }
+    );
+
+  //Promiseのエラーハンドリングがされていないエラーになる
+  const p2 = readFile("foo.txt", "utf8")
+    .then(() => sleepReject(1000))
+    .then((result) => {
+      console.log(result);
+    });
+  //↑はthen2つ目のコールバック関数を利用するかキャッチさせる
+  const p3 = readFile("foo.txt", "utf8")
+    .then(() => sleepReject(1000))
+    .then((result) => {
+      console.log(result);
+    })
+    .catch((err) => {
+      console.log("エラーが発生しました！！", err);
+    });
+};
+export const sentence21 = () => {
+  const p = readFile("foo.txt", "utf8");
+  const p2 = p.then((result) => {
+    console.log("成功", result);
+  });
+  const p3 = p2.catch((error) => {
+    console.log("失敗", error);
+  });
+};
+// 8.3.11 dynamic import 構文
+export const sentence22 = () => {
+  import("fs/promises")
+    .then(({ readFile }) => readFile("foo.txt", "utf8"))
+    .then((result) => {
+      console.log(result);
+    })
+    .catch((error) => {
+      console.log("エラーが発生しました!!", error);
+    });
 };
